@@ -3,8 +3,8 @@ import random
 import os
 import time
 import neat
-import visualize
-import pickle
+#import visualize
+#import pickle
 pygame.font.init()
 
 WIN_WIDTH = 600
@@ -17,16 +17,16 @@ DRAW_LINES = False
 WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
 
-pipe_img = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","pipe.png")).convert_alpha())
-bg_img = pygame.transform.scale(pygame.image.load(os.path.join("imgs","bg.png")).convert_alpha(), (600, 900))
-bird_images = [pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bird" + str(x) + ".png"))) for x in range(1,4)]
-base_img = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","base.png")).convert_alpha())
+PIPE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","pipe.png")).convert_alpha())
+BG_IMG = pygame.transform.scale(pygame.image.load(os.path.join("imgs","bg.png")).convert_alpha(), (600, 900))
+BIRD_IMAGES = [pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bird" + str(x) + ".png"))) for x in range(1,4)]
+BASE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","base.png")).convert_alpha())
 
 gen = 0
 
 class Bird:
     MAX_ROTATION = 25
-    IMGS = bird_images
+    IMGS = BIRD_IMAGES
     ROT_VEL = 20
     ANIMATION_TIME = 5
 
@@ -92,6 +92,16 @@ class Bird:
     def get_mask(self):
         return pygame.mask.from_surface(self.img)
 
+class Pipe:
+    GAP = 200
+    VEL = 5
+
+def blitRotateCenter(surf, image, topleft, angle):
+    rotated_image = pygame.transform.rotate(image, angle)
+    new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
+
+    surf.blit(rotated_image, new_rect.topleft)
+
 def draw_window(win, bird):
     win.blit(BG_IMG, (0, 0))
     bird.draw(win)
@@ -100,6 +110,7 @@ def draw_window(win, bird):
 def main():
     bird = Bird(200, 200)
     win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
+    clock = pygame.time.Clock()
     run = True
 
     while run:
@@ -107,6 +118,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
+        bird.move()
         draw_window(win, bird)
 
     pygame.quit()
