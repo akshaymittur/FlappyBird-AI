@@ -131,6 +131,10 @@ class Pipe:
         b_point = bird_mask.overlap(bottom_mask, bottom_offset)
         b_point = bird_mask.overlap(top_mask, top_offset)
 
+        if t_point or b_point:
+            return True
+        return False
+
 
 def blitRotateCenter(surf, image, topleft, angle):
     rotated_image = pygame.transform.rotate(image, angle)
