@@ -236,10 +236,9 @@ def main(genomes, config):
             for x, bird in enumerate(birds):
                 if pipe.collide(bird):
                     ge[x].fitness -= 1
-                    birds.remove(bird)
-                    birds.pop(x)
                     nets.pop(x)
                     ge.pop(x)
+                    birds.pop(x)
 
                 if not pipe.passed and pipe.x < bird.x:
                     pipe.passed =True
@@ -261,9 +260,9 @@ def main(genomes, config):
 
         for x, bird in enumerate(birds):
             if bird.y + bird.img.get_height() >= 730 or bird.y < 0:
-                birds.pop(x)
                 nets.pop(x)
                 ge.pop(x)
+                birds.pop(x)
 
 
         base.move()
