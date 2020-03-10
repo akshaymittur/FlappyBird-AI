@@ -99,9 +99,17 @@ def draw_window(win, bird):
 
 def main():
     bird = Bird(200, 200)
+    win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
     run = True
 
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                run = False
+
+        draw_window(win, bird)
+
+    pygame.quit()
+    quit()
+
+main()
