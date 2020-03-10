@@ -3,8 +3,7 @@ import random
 import os
 import time
 import neat
-#import visualize
-#import pickle
+import pickle
 
 pygame.font.init()
 
@@ -273,6 +272,10 @@ def main(genomes, config):
         base.move()
         draw_window(win, birds, pipes, base, score, gen)
 
+        if score > 50:
+            pickle.dump(nets[0],open("best.pickle", "wb"))
+            break
+
 def run(config_path):
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
                     neat.DefaultSpeciesSet, neat.DefaultStagnation,
@@ -285,6 +288,8 @@ def run(config_path):
     p.add_reporter(stats)
 
     winner = p.run(main, 50)
+
+    print("\nBest Genome: {!s}".format(winner))
 
 if __name__ == '__main__':
     local_dir = os.path.dirname(__file__)
