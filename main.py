@@ -272,7 +272,7 @@ def main(genomes, config):
 def run(config_path):
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
                     neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                    config_file)
+                    config_path)
 
     p = neat.Population(config)
 
