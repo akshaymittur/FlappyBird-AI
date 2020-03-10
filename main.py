@@ -85,9 +85,23 @@ class Bird:
 
         if self.tilt <= -80:
             self.img = self.IMGS[1]
-            self.img_count = self.ANIMATION_TIME*2
+            self.img_count = self.ANIMATION_TIME * 2
 
         blitRotateCenter(win, self.img, (self.x, self.y), self.tilt)
 
     def get_mask(self):
         return pygame.mask.from_surface(self.img)
+
+def draw_window(win, bird):
+    win.blit(BG_IMG, (0, 0))
+    bird.draw(win)
+    pygame.display.update()
+
+def main():
+    bird = Bird(200, 200)
+    run = True
+
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
