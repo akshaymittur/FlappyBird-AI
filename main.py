@@ -144,7 +144,7 @@ class Base:
     def __init__(self, y):
         self.y = y
         self.x1 = 0
-        self.x2 = 0
+        self.x2 = self.WIDTH
 
     def move(self):
         self.x1 -= self.VEL
@@ -189,11 +189,13 @@ def main():
     run = True
 
     while run:
+        clock.tick(30)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
 
         #bird.move()
+        base.move()
         draw_window(win, bird, pipes, base)
 
     pygame.quit()
