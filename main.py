@@ -116,6 +116,16 @@ class Pipe:
     def move(self):
         self.x -= self.VEL
 
+    def draw(self, win):
+        win.blit(self.PIPE_TOP, (self.x, self. top))
+        win.blit(self.PIPE_BOTTOM, (self.x, self. bottom))
+
+    def collide(self, bird):
+        bird_mask = bird.get_mask()
+        top_mask = pygame.mask.from_surface(self.PIPE_TOP)
+        bottom_mask = pygame.mask.from_surface(self.PIPE_BOTTOM)
+
+
 def blitRotateCenter(surf, image, topleft, angle):
     rotated_image = pygame.transform.rotate(image, angle)
     new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
