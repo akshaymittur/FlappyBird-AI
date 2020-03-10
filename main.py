@@ -183,7 +183,17 @@ def draw_window(win, bird, pipes, base, score):
     pygame.display.update()
 
 def main(genomes, config):
+    nets = []
+    ge = []
     birds = []
+
+    for g in genomes:
+        net = neat.nn.FeedForwardNetwork(g, config)
+        nets.append(net)
+        birds.append(Bird(250, 350))
+        g.fitness = 0
+        ge.append(g)
+
     base = Base(730)
     pipes = [Pipe(600)]
 
