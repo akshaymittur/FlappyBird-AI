@@ -195,6 +195,11 @@ def main():
                 run = False
 
         #bird.move()
+        for pipe in pipes:
+            if pipe.collide(bird):
+                pass
+            pipe.move()
+
         base.move()
         draw_window(win, bird, pipes, base)
 
