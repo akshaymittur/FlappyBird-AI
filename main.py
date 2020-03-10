@@ -60,7 +60,7 @@ class Bird:
 
         self.y = self.y + displacement
 
-        if displacement < 0 or self.y < self.height + 50:  # tilt up
+        if displacement < 0 or self.y < self.height + 50:
             if self.tilt < self.MAX_ROTATION:
                 self.tilt = self.MAX_ROTATION
         else:  
@@ -73,13 +73,13 @@ class Bird:
  
         if self.img_count <= self.ANIMATION_TIME:
             self.img = self.IMGS[0]
-        elif self.img_count <= self.ANIMATION_TIME*2:
+        elif self.img_count <= self.ANIMATION_TIME * 2:
             self.img = self.IMGS[1]
-        elif self.img_count <= self.ANIMATION_TIME*3:
+        elif self.img_count <= self.ANIMATION_TIME * 3:
             self.img = self.IMGS[2]
-        elif self.img_count <= self.ANIMATION_TIME*4:
+        elif self.img_count <= self.ANIMATION_TIME * 4:
             self.img = self.IMGS[1]
-        elif self.img_count == self.ANIMATION_TIME*4 + 1:
+        elif self.img_count == self.ANIMATION_TIME * 4 + 1:
             self.img = self.IMGS[0]
             self.img_count = 0
 
