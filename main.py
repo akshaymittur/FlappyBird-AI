@@ -168,7 +168,7 @@ def blitRotateCenter(surf, image, topleft, angle):
 
     surf.blit(rotated_image, new_rect.topleft)
 
-def draw_window(win, birds, pipes, base, score):
+def draw_window(win, birds, pipes, base, score, gen):
     win.blit(BG_IMG, (0, 0))
 
     for pipe in pipes:
@@ -176,6 +176,9 @@ def draw_window(win, birds, pipes, base, score):
 
     text = STAT_FONT.render("Score: " + str(score), 1, (255, 255, 255))
     win.blit(text, (WIN_WIDTH - 10 - text.get_width(), 10))
+
+    text = STAT_FONT.render("Generation: " + str(gen), 1, (255, 255, 255))
+    win.blit(text, (10, 10))
 
     base.draw(win)
 
@@ -185,6 +188,8 @@ def draw_window(win, birds, pipes, base, score):
     pygame.display.update()
 
 def main(genomes, config):
+    global gen 
+    gen += 1
     nets = []
     ge = []
     birds = []
@@ -266,7 +271,7 @@ def main(genomes, config):
 
 
         base.move()
-        draw_window(win, birds, pipes, base, score)
+        draw_window(win, birds, pipes, base, score, gen)
 
 def run(config_path):
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
