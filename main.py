@@ -49,11 +49,9 @@ class Bird:
     def move(self):
         
         self.tick_count += 1
-
         
-        displacement = self.vel*(self.tick_count) + 0.5*(3)*(self.tick_count)**2  # calculate displacement
+        displacement = self.vel * (self.tick_count) + 0.5 * (3) * (self.tick_count) ** 2
 
-        
         if displacement >= 16:
             displacement = (displacement/abs(displacement)) * 16
 
